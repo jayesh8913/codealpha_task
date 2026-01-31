@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shopping Cart - E-Commerce Store</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <h1 class="logo">🛍️ ShopHub</h1>
+            <div class="nav-links">
+                <a href="index.html" class="nav-link">Home</a>
+                <a href="cart.html" class="nav-link active">Cart (<span id="cart-count">0</span>)</a>
+                <a href="orders.html" class="nav-link">Orders</a>
+                <div id="auth-buttons">
+                    <button id="login-btn" class="btn btn-outline">Login</button>
+                    <button id="register-btn" class="btn btn-primary">Register</button>
+                </div>
+                <div id="user-info" style="display: none;">
+                    <span id="user-name"></span>
+                    <button id="logout-btn" class="btn btn-outline">Logout</button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <main class="container">
+        <h2>Shopping Cart</h2>
+        <div id="cart-content">
+            <div id="cart-items" class="cart-items">
+                <!-- Cart items will be loaded here -->
+            </div>
+            <div id="cart-summary" class="cart-summary">
+                <h3>Order Summary</h3>
+                <div class="summary-row">
+                    <span>Subtotal:</span>
+                    <span id="cart-subtotal">$0.00</span>
+                </div>
+                <div class="summary-row">
+                    <span>Total:</span>
+                    <span id="cart-total" class="total-price">$0.00</span>
+                </div>
+                <button id="checkout-btn" class="btn btn-primary btn-large" disabled>Proceed to Checkout</button>
+            </div>
+        </div>
+        <div id="empty-cart" class="empty-cart" style="display: none;">
+            <p>Your cart is empty</p>
+            <a href="index.html" class="btn btn-primary">Continue Shopping</a>
+        </div>
+    </main>
+
+    <!-- Checkout Modal -->
+    <div id="checkout-modal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Checkout</h2>
+            <form id="checkout-form">
+                <h3>Shipping Address</h3>
+                <div class="form-group">
+                    <label for="street">Street</label>
+                    <input type="text" id="street" required>
+                </div>
+                <div class="form-group">
+                    <label for="city">City</label>
+                    <input type="text" id="city" required>
+                </div>
+                <div class="form-group">
+                    <label for="state">State</label>
+                    <input type="text" id="state" required>
+                </div>
+                <div class="form-group">
+                    <label for="zipCode">Zip Code</label>
+                    <input type="text" id="zipCode" required>
+                </div>
+                <div class="form-group">
+                    <label for="country">Country</label>
+                    <input type="text" id="country" required>
+                </div>
+                <div class="summary-row">
+                    <span>Total Amount:</span>
+                    <span id="checkout-total" class="total-price">$0.00</span>
+                </div>
+                <button type="submit" class="btn btn-primary btn-large">Place Order</button>
+            </form>
+            <p id="checkout-error" class="error-message"></p>
+        </div>
+    </div>
+
+    <!-- Login Modal -->
+    <div id="login-modal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Login</h2>
+            <form id="login-form">
+                <div class="form-group">
+                    <label for="login-email">Email</label>
+                    <input type="email" id="login-email" required>
+                </div>
+                <div class="form-group">
+                    <label for="login-password">Password</label>
+                    <input type="password" id="login-password" required>
+                </div>
+                <button type="submit" class="btn btn-primary">Login</button>
+            </form>
+            <p id="login-error" class="error-message"></p>
+        </div>
+    </div>
+
+    <!-- Register Modal -->
+    <div id="register-modal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Register</h2>
+            <form id="register-form">
+                <div class="form-group">
+                    <label for="register-name">Name</label>
+                    <input type="text" id="register-name" required>
+                </div>
+                <div class="form-group">
+                    <label for="register-email">Email</label>
+                    <input type="email" id="register-email" required>
+                </div>
+                <div class="form-group">
+                    <label for="register-password">Password</label>
+                    <input type="password" id="register-password" required minlength="6">
+                </div>
+                <button type="submit" class="btn btn-primary">Register</button>
+            </form>
+            <p id="register-error" class="error-message"></p>
+        </div>
+    </div>
+
+    <script src="auth.js"></script>
+    <script src="cart.js"></script>
+</body>
+</html>

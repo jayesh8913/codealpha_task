@@ -1,7 +1,7 @@
 # CodeAlpha Internship Tasks
 
 This repository contains all the tasks completed during my internship at **CodeAlpha**.  
-Each task is organized in its own folder and demonstrates practical implementation of concepts using Java and related technologies.
+Each task is organized in its own folder and demonstrates practical implementation of concepts of full stack development and related technologies.
 
 ## 📂 Repository Structure
 - Each folder represents a separate internship task

@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Social Media Platform</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <h1 class="logo">📱 SocialHub</h1>
+            <div class="nav-links">
+                <a href="index.html" class="nav-link active">Feed</a>
+                <a href="#" id="discover-link" class="nav-link">Discover</a>
+                <a href="#" id="profile-link" class="nav-link">Profile</a>
+                <div id="auth-buttons">
+                    <button id="login-btn" class="btn btn-outline">Login</button>
+                    <button id="register-btn" class="btn btn-primary">Sign Up</button>
+                </div>
+                <div id="user-info" style="display: none;">
+                    <img id="user-avatar" src="" alt="Avatar" class="user-avatar">
+                    <span id="user-name"></span>
+                    <button id="logout-btn" class="btn btn-outline">Logout</button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <main class="container">
+        <div id="auth-required" class="auth-required" style="display: none;">
+            <h2>Welcome to SocialHub</h2>
+            <p>Please login or register to see posts and interact with others</p>
+        </div>
+
+        <div id="main-content" style="display: none;">
+            <div class="feed-layout">
+                <aside class="sidebar">
+                    <div class="create-post-card">
+                        <h3>Create Post</h3>
+                        <form id="create-post-form">
+                            <textarea id="post-content" placeholder="What's on your mind?" rows="4" maxlength="1000"></textarea>
+                            <div class="char-count">
+                                <span id="char-count">0</span>/1000
+                            </div>
+                            <input type="url" id="post-image" placeholder="Image URL (optional)">
+                            <button type="submit" class="btn btn-primary btn-block">Post</button>
+                        </form>
+                    </div>
+                </aside>
+
+                <div class="feed-content">
+                    <div class="feed-tabs">
+                        <button class="tab-btn active" data-tab="feed">Your Feed</button>
+                        <button class="tab-btn" data-tab="discover">Discover</button>
+                    </div>
+
+                    <div id="posts-container" class="posts-container">
+                        <!-- Posts will be loaded here -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Login Modal -->
+    <div id="login-modal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Login</h2>
+            <form id="login-form">
+                <div class="form-group">
+                    <label for="login-email">Email</label>
+                    <input type="email" id="login-email" required>
+                </div>
+                <div class="form-group">
+                    <label for="login-password">Password</label>
+                    <input type="password" id="login-password" required>
+                </div>
+                <button type="submit" class="btn btn-primary btn-block">Login</button>
+            </form>
+            <p id="login-error" class="error-message"></p>
+        </div>
+    </div>
+
+    <!-- Register Modal -->
+    <div id="register-modal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Sign Up</h2>
+            <form id="register-form">
+                <div class="form-group">
+                    <label for="register-username">Username</label>
+                    <input type="text" id="register-username" required minlength="3" maxlength="30">
+                </div>
+                <div class="form-group">
+                    <label for="register-name">Full Name</label>
+                    <input type="text" id="register-name" required>
+                </div>
+                <div class="form-group">
+                    <label for="register-email">Email</label>
+                    <input type="email" id="register-email" required>
+                </div>
+                <div class="form-group">
+                    <label for="register-password">Password</label>
+                    <input type="password" id="register-password" required minlength="6">
+                </div>
+                <button type="submit" class="btn btn-primary btn-block">Sign Up</button>
+            </form>
+            <p id="register-error" class="error-message"></p>
+        </div>
+    </div>
+
+    <!-- Post Details Modal -->
+    <div id="post-modal" class="modal">
+        <div class="modal-content modal-large">
+            <span class="close">&times;</span>
+            <div id="post-details">
+                <!-- Post details will be loaded here -->
+            </div>
+        </div>
+    </div>
+
+    <script src="auth.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>

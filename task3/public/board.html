@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project Board - TaskBoard</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <h1 class="logo">📋 TaskBoard</h1>
+            <div class="nav-links">
+                <a href="index.html" class="nav-link">Projects</a>
+                <div id="auth-buttons">
+                    <button id="login-btn" class="btn btn-outline">Login</button>
+                    <button id="register-btn" class="btn btn-primary">Sign Up</button>
+                </div>
+                <div id="user-info" style="display: none;">
+                    <img id="user-avatar" src="" alt="Avatar" class="user-avatar">
+                    <span id="user-name"></span>
+                    <button id="notifications-btn" class="btn btn-outline" title="Notifications">
+                        🔔 <span id="notification-count" class="badge">0</span>
+                    </button>
+                    <button id="logout-btn" class="btn btn-outline">Logout</button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <main class="container">
+        <div id="board-content">
+            <!-- Board will be loaded here -->
+        </div>
+    </main>
+
+    <!-- Task Details Modal -->
+    <div id="task-modal" class="modal">
+        <div class="modal-content modal-large">
+            <span class="close">&times;</span>
+            <div id="task-details">
+                <!-- Task details will be loaded here -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Create Task Modal -->
+    <div id="create-task-modal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Create New Task</h2>
+            <form id="create-task-form">
+                <div class="form-group">
+                    <label for="task-title">Title</label>
+                    <input type="text" id="task-title" required>
+                </div>
+                <div class="form-group">
+                    <label for="task-description">Description</label>
+                    <textarea id="task-description" rows="4"></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="task-priority">Priority</label>
+                    <select id="task-priority">
+                        <option value="low">Low</option>
+                        <option value="medium" selected>Medium</option>
+                        <option value="high">High</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="task-due-date">Due Date</label>
+                    <input type="date" id="task-due-date">
+                </div>
+                <div class="form-group">
+                    <label for="task-assigned-to">Assign To</label>
+                    <select id="task-assigned-to">
+                        <option value="">Unassigned</option>
+                    </select>
+                </div>
+                <input type="hidden" id="task-column">
+                <button type="submit" class="btn btn-primary btn-block">Create Task</button>
+            </form>
+            <p id="create-task-error" class="error-message"></p>
+        </div>
+    </div>
+
+    <!-- Edit Task Modal -->
+    <div id="edit-task-modal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Edit Task</h2>
+            <form id="edit-task-form" onsubmit="updateTask(); return false;">
+                <input type="hidden" id="edit-task-id">
+                <div class="form-group">
+                    <label for="edit-task-title">Title</label>
+                    <input type="text" id="edit-task-title" required>
+                </div>
+                <div class="form-group">
+                    <label for="edit-task-description">Description</label>
+                    <textarea id="edit-task-description" rows="4"></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="edit-task-priority">Priority</label>
+                    <select id="edit-task-priority">
+                        <option value="low">Low</option>
+                        <option value="medium">Medium</option>
+                        <option value="high">High</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="edit-task-due-date">Due Date</label>
+                    <input type="date" id="edit-task-due-date">
+                </div>
+                <div class="form-group">
+                    <label for="edit-task-assigned-to">Assign To</label>
+                    <select id="edit-task-assigned-to">
+                        <option value="">Unassigned</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="edit-task-column">Status</label>
+                    <select id="edit-task-column">
+                        <option value="To Do">To Do</option>
+                        <option value="In Progress">In Progress</option>
+                        <option value="Done">Done</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn btn-primary btn-block">Update Task</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Project Settings Modal -->
+    <div id="project-settings-modal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Project Settings</h2>
+            <form id="project-settings-form">
+                <div class="form-group">
+                    <label for="settings-project-name">Project Name</label>
+                    <input type="text" id="settings-project-name" required>
+                </div>
+                <div class="form-group">
+                    <label for="settings-project-description">Description</label>
+                    <textarea id="settings-project-description" rows="4"></textarea>
+                </div>
+                <h3>Members</h3>
+                <div id="project-members-list"></div>
+                <div class="form-group">
+                    <label for="add-member-email">Add Member (Email)</label>
+                    <input type="email" id="add-member-email" placeholder="Enter user email">
+                    <button type="button" id="add-member-btn" class="btn btn-outline">Add</button>
+                </div>
+                <button type="submit" class="btn btn-primary btn-block">Save Changes</button>
+            </form>
+            <p id="project-settings-error" class="error-message"></p>
+        </div>
+    </div>
+
+    <!-- Login Modal -->
+    <div id="login-modal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Login</h2>
+            <form id="login-form">
+                <div class="form-group">
+                    <label for="login-email">Email</label>
+                    <input type="email" id="login-email" required>
+                </div>
+                <div class="form-group">
+                    <label for="login-password">Password</label>
+                    <input type="password" id="login-password" required>
+                </div>
+                <button type="submit" class="btn btn-primary btn-block">Login</button>
+            </form>
+            <p id="login-error" class="error-message"></p>
+        </div>
+    </div>
+
+    <!-- Register Modal -->
+    <div id="register-modal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Sign Up</h2>
+            <form id="register-form">
+                <div class="form-group">
+                    <label for="register-username">Username</label>
+                    <input type="text" id="register-username" required minlength="3" maxlength="30">
+                </div>
+                <div class="form-group">
+                    <label for="register-name">Full Name</label>
+                    <input type="text" id="register-name" required>
+                </div>
+                <div class="form-group">
+                    <label for="register-email">Email</label>
+                    <input type="email" id="register-email" required>
+                </div>
+                <div class="form-group">
+                    <label for="register-password">Password</label>
+                    <input type="password" id="register-password" required minlength="6">
+                </div>
+                <button type="submit" class="btn btn-primary btn-block">Sign Up</button>
+            </form>
+            <p id="register-error" class="error-message"></p>
+        </div>
+    </div>
+
+    <!-- Notifications Modal -->
+    <div id="notifications-modal" class="modal">
+        <div class="modal-content modal-large">
+            <span class="close">&times;</span>
+            <div class="notifications-header">
+                <h2>Notifications</h2>
+                <button id="mark-all-read-btn" class="btn btn-outline">Mark All Read</button>
+            </div>
+            <div id="notifications-list" class="notifications-list">
+                <!-- Notifications will be loaded here -->
+            </div>
+        </div>
+    </div>
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="auth.js"></script>
+    <script src="board.js"></script>
+</body>
+</html>
