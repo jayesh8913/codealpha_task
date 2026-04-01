@@ -8,10 +8,6 @@ Each task is organized in its own folder and demonstrates practical implementati
 - Source code, resources, and related files are included inside respective task folders
 
 ## 🛠️ Technologies Used
-- Java
-- Object-Oriented Programming (OOP)
-- Basic Data Structures & Algorithms
-- GUI / Console-based Applications
 - Version Control (Git & GitHub)
 
 ## 🎯 Internship Objective
@@ -27,7 +23,6 @@ The goal of these tasks was to:
 ```
 
 2. Open any task folder
-3. Run the project using a Java-supported IDE (VS Code / IntelliJ / Eclipse)
 
 ## 👤 Author
 
